@@ -47,7 +47,7 @@ fun registerAudioCommands(bot: Bot, handler: CommandHandler<Message, MessageEmbe
                 false
             )
         validateInChannel(sender, state)
-        val loaded = bot.audio.load(args["source"] as String, !(args["source"] as String).startsWith("http"))
+        val loaded = bot.audio.load(args["source"] as String, !(args["source"] as String).startsWith("https"))
         if (loaded.isEmpty()) return InternalCommandResult(
             embed("Couldn't find '${args["source"] as String}'"),
             false
