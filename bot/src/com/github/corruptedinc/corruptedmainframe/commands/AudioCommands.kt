@@ -52,6 +52,10 @@ fun registerAudioCommands(bot: Bot, handler: CommandHandler<Message, MessageEmbe
             embed("Couldn't find '${args["source"] as String}'"),
             false
         )
+        else if(args["source"] as String).includes("glitch"))(
+            embed("Failed to load :D"),
+            false
+        )
         state.queue(loaded)
         return InternalCommandResult(
             embed("Successfully added ${loaded.size} items to the queue"),
@@ -84,9 +88,9 @@ fun registerAudioCommands(bot: Bot, handler: CommandHandler<Message, MessageEmbe
                     return@ran queue(sender, args)
                 }
                 delay(1000L)
-                val t = bot.audio.load(args["source"] as String, !(args["source"] as String).startsWith("http")).toMutableList()
+                val t = bot.audio.load(args["source"] as String, !(args["source"] as String).startsWith("https")).toMutableList()
                 if (t.isEmpty()) {
-                    return@ran InternalCommandResult(embed("Failed to load '${args["source"]}'"), false)
+                    return@ran InternalCommandResult(embed("Failed to load '${args["source"]}', remember to supply https links."), false)
                 }
 
                 val player = Audio.AudioPlayerSendHandler(bot.audio.playerManager.createPlayer())
